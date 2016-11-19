@@ -8,6 +8,7 @@ use app\models\WorkspaceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 
 /**
  * WorkspaceController implements the CRUD actions for Workspace model.
@@ -122,5 +123,27 @@ class WorkspaceController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionUser()
+    {
+        if(!empty($_POST))
+            die("Shhksfh");
+        $result = [];
+        $data=Workspace::getAllData();
+        $query = new Query;
+        $query->select(['w.*', 'a.Name as AreaName'])
+              ->from('Workspace w')
+              ->join('INNER JOIN','Area a','w.AreaID =a.AreaID');
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        if(!empty(Yii::$app->request->post()))
+        {
+            echo "Dhiraj";die;
+        }
+        return $this->render('workspace_users',[
+            'data'=>$data,
+            'result' => $result
+        ]);
     }
 }

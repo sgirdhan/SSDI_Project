@@ -57,4 +57,9 @@ class Workspace extends \yii\db\ActiveRecord
     {
         return Area::find()->where(['AreaID' => $this->AreaID])->one();
     }
+
+    public static function getAllData()
+    {
+        return Workspace::find()->where(['IsActive'=> 1])->all();
+    }
 }
