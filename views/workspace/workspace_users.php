@@ -10,6 +10,7 @@ use kartik\datetime\DateTimePicker;
 
 <div class="container">
 	<form method="post">
+		<input type="hidden" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->getCsrfToken()?>" />
 		<div class="form-group">
 			<label for="workspace">Workspace</label>
 			<select class="form-control" id="workspace" name="workspace_id">
